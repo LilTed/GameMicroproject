@@ -130,6 +130,7 @@ public class Game {
             terminal.moveCursor(m.getX(), m.getY());
             terminal.putCharacter(m.getGraphics());
         }
+
     }
 
     private void gameOver() {
