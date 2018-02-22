@@ -1,7 +1,7 @@
 public class Wall extends Gameobject {
 
     public Wall(int x, int y) {
-        super(x, y, '*);
+        super(x, y, '*');
     }
     /*
     Wall[][] wall = new Wall[30][30];

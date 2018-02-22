@@ -25,4 +25,16 @@ public class Monster extends Character {
             }
         }
     }
+
+    @Override
+    protected boolean onCollide(Object obj) {
+        if (obj instanceof Monster) {
+            alive = false;
+            return true;
+        } else if (obj instanceof Player) {
+            ((Player) obj).kill();
+            return false;
+        }
+        return false;
+    }
 }

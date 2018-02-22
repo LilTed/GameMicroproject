@@ -1,9 +1,22 @@
 import java.util.ArrayList;
 
 public class Character extends Gameobject {
+    boolean alive = true;
 
     protected Character(int x, int y, char g) {
         super(x, y, g);
+    }
+
+    public boolean isAlive() {
+        return alive;
+    }
+
+    protected void kill() {
+        alive = false;
+    }
+
+    protected boolean onCollide(Object obj) {
+        return false;
     }
 
     protected void move(int x, int y, ArrayList<Gameobject> objs) {
@@ -12,8 +25,9 @@ public class Character extends Gameobject {
 
         for (Gameobject obj : objs) {
             if (newX == obj.getX() && newY == obj.getY()) {
-                // collision
-                return;
+                if(onCollide(obj)) {
+                    return;
+                }
             }
         }
 

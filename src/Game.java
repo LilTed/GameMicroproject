@@ -117,13 +117,9 @@ public class Game {
     private void checkCollision() {
         if (player.getX() < 0 || player.getY() < 0 || player.getX() >= terminal.getTerminalSize().getColumns() || player.getY() >= terminal.getTerminalSize().getRows()) {
             gameOver();
-        } else {
-            for (int j = 1; j < monsters.length; j++) {
-                if (Math.abs(player.getX() - monsters[j].getX()) <= 1 &&
-                        Math.abs(player.getY() - monsters[j].getY()) <= 1) {
-                    gameOver();
-                }
-            }
+        }
+        if (!player.isAlive()) {
+            gameOver();
         }
     }
 
