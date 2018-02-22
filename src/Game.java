@@ -66,39 +66,45 @@ public class Game {
 
     private void handleInput() {
         Key key;
-        do {
-            try {
-                Thread.sleep(5);
-            } catch (InterruptedException ex) {
+        boolean badInput = true;
+        while (badInput) {
+            do {
+                try {
+                    Thread.sleep(5);
+                } catch (InterruptedException ex) {
 
+                }
+                key = terminal.readInput();
             }
-            key = terminal.readInput();
-        }
-        while (key == null);
+            while (key == null);
 
-        switch (key.getKind()) {
-            case ArrowDown:
-                score++;
-                player.moveDown();
-                break;
-            case ArrowUp:
-                score++;
-                player.moveUp();
-                break;
-            case ArrowLeft:
-                score++;
-                player.moveLeft();
-                break;
-            case ArrowRight:
-                score++;
-                player.moveRight();
-                break;
-        }
+            switch (key.getKind()) {
+                case ArrowDown:
+                    score++;
+                    badInput = false;
+                    player.moveDown();
+                    break;
+                case ArrowUp:
+                    score++;
+                    badInput = false;
+                    player.moveUp();
+                    break;
+                case ArrowLeft:
+                    score++;
+                    badInput = false;
+                    player.moveLeft();
+                    break;
+                case ArrowRight:
+                    score++;
+                    badInput = false;
+                    player.moveRight();
+                    break;
+            }
 
-        while (key != null) {
-            key = terminal.readInput();
+            while (key != null) {
+                key = terminal.readInput();
+            }
         }
-        //System.out.println(key.getCharacter() + " " + key.getKind());
     }
 
     private void checkCollision() {
@@ -130,38 +136,42 @@ public class Game {
         terminal.clearScreen();
         printText(45, 15, "Game over!");
         printText(45, 16, "Your score is: " + Integer.toString(score));
-        printText(45,18,"Press y to play again.");
+        printText(45, 18, "Press 'y' to play again and press 'n' to quit");
 
-        if (score>highScore) {
-            highScore=score;
-            printText(45,17,"Your scored a new high score: " + highScore);
-        }
-        else {
-            printText(45,17,"Your high score this session: " + highScore);
+        if (score > highScore) {
+            highScore = score;
+            printText(45, 17, "Your scored a new high score: " + highScore);
+        } else {
+            printText(45, 17, "Your high score this session: " + highScore);
         }
 
         Key key;
-        do {
-            try {
-                Thread.sleep(5);
-            } catch (InterruptedException ex) {
+        boolean badInput = true;
+        while (badInput) {
+            do {
+                try {
+                    Thread.sleep(5);
+                } catch (InterruptedException ex) {
 
+                }
+                key = terminal.readInput();
             }
-            key = terminal.readInput();
-        }
-        while (key == null);
+            while (key == null);
 
-        switch (key.getCharacter()) {
-            case 'y':
-                initGame();
-                break;
-            default:
-                running = false;
-                break;
-        }
+            switch (key.getCharacter()) {
+                case 'y':
+                    initGame();
+                    badInput = false;
+                    break;
+                case 'n':
+                    running = false;
+                    badInput = false;
+                    break;
+            }
 
-        while (key != null) {
-            key = terminal.readInput();
+            while (key != null) {
+                key = terminal.readInput();
+            }
         }
     }
 
