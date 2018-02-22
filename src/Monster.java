@@ -28,12 +28,12 @@ public class Monster extends Character {
 
     @Override
     protected boolean onCollide(Object obj) {
-        if (obj instanceof Monster) {
+        if (obj.getClass() == Monster.class) {
             alive = false;
             return true;
-        } else if (obj instanceof Player) {
+        } else if (obj.getClass() == Player.class) {
             ((Player) obj).kill();
-            return false;
+            return true;
         }
         return false;
     }

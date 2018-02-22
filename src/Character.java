@@ -19,13 +19,14 @@ public class Character extends Gameobject {
         return false;
     }
 
+
     protected void move(int x, int y, ArrayList<Gameobject> objs) {
         int newX = this.x + x;
         int newY = this.y + y;
 
         for (Gameobject obj : objs) {
             if (newX == obj.getX() && newY == obj.getY()) {
-                if(onCollide(obj)) {
+                if(!onCollide(obj)) {
                     return;
                 }
             }

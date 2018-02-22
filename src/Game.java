@@ -45,11 +45,11 @@ public class Game {
         player = new Player(20, 20);
         objects.add(player);
         for (int i = 0; i < monsters.length; i++) {
-            Monster t = new Monster(rand.nextInt(terminal.getTerminalSize().getColumns()),
-                    rand.nextInt(terminal.getTerminalSize().getRows()));
+            Monster t = new Monster(rand.nextInt(29)+1,rand.nextInt(29)+1);
             monsters[i] = t;
             objects.add(t);
         }
+        createBorder();
         onScreen();
     }
 
@@ -121,6 +121,23 @@ public class Game {
         if (!player.isAlive()) {
             gameOver();
         }
+    }
+    private void createBorder() {
+
+        for (int i = 0; i < 30; i++) {
+            objects.add(new Wall(i, 0));
+        }
+        for (int i = 0; i < 30; i++) {
+            objects.add(new Wall(0, i));
+        }
+        for (int i = 0; i < 30; i++) {
+            objects.add(new Wall(30, i));
+        }
+        for (int i = 0; i < 30; i++) {
+            objects.add(new Wall(i, 30));
+        }
+
+
     }
 
     private void onScreen() {
