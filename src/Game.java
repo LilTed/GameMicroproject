@@ -134,6 +134,7 @@ public class Game {
             terminal.moveCursor(o.getX(), o.getY());
             terminal.putCharacter(o.getGraphics());
         }
+
     }
 
     private void gameOver() {
