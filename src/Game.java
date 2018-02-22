@@ -42,10 +42,10 @@ public class Game {
         Random rand = new Random();
         monsters = new Monster[rand.nextInt(4) + 2];
         objects = new ArrayList<>();
-        player = new Player(20, 20);
+        player = new Player(15, 15);
         objects.add(player);
         for (int i = 0; i < monsters.length; i++) {
-            Monster t = new Monster(rand.nextInt(29)+1,rand.nextInt(29)+1);
+            Monster t = new Monster(rand.nextInt(28)+1,rand.nextInt(28)+1);
             monsters[i] = t;
             objects.add(t);
         }
@@ -134,7 +134,7 @@ public class Game {
             objects.add(new Wall(30, i));
         }
         for (int i = 0; i < 30; i++) {
-            objects.add(new Wall(i, 30));
+            objects.add(new Wall(i, 29));
         }
 
 
