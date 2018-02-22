@@ -11,13 +11,8 @@ public class Player extends Gameobject {
     public void moveRight(){
         move(1, 0);
     }
-    public void moveLeft(){
+    public void moveLeft() {
         move(-1, 0);
 
-    }
-
-    @Override
-    public void onLoop() {
-        super.onLoop();
     }
 }

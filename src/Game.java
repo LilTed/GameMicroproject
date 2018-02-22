@@ -13,8 +13,8 @@ public class Game {
     private int score;
     private int highScore;
 
-    Gameobject[] gameobject;
-    Player player;
+    private Monster[] monsters;
+    private Player player;
 
     public void run() {
         initWindow();
@@ -37,10 +37,10 @@ public class Game {
     private void initGame() {
         score = 0;
         Random rand = new Random();
-        gameobject = new Gameobject[rand.nextInt(4) + 2]; //Skapar player och monster
+        monsters = new Monster[rand.nextInt(4) + 2];
         player = new Player(20, 20);
-        for (int i = 0; i < gameobject.length; i++) {
-            gameobject[i] = new Monster(rand.nextInt(terminal.getTerminalSize().getColumns()),
+        for (int i = 0; i < monsters.length; i++) {
+            monsters[i] = new Monster(rand.nextInt(terminal.getTerminalSize().getColumns()),
                     rand.nextInt(terminal.getTerminalSize().getRows()));
         }
         onScreen();
@@ -51,16 +51,16 @@ public class Game {
     }
 
     private void loop() {
-        onLoop();
         handleInput();
+        onLoop();
         checkCollision();
         onScreen();
     }
 
     private void onLoop() {
         player.onLoop();
-        for (int i = 0; i < gameobject.length; i++) {
-            gameobject[i].onLoop(player.getX(), player.getY());
+        for (int i = 0; i < monsters.length; i++) {
+            monsters[i].onLoop(player.getX(), player.getY());
         }
     }
 
@@ -105,9 +105,9 @@ public class Game {
         if (player.getX() < 0 || player.getY() < 0 || player.getX() >= terminal.getTerminalSize().getColumns() || player.getY() >= terminal.getTerminalSize().getRows()) {
             gameOver();
         } else {
-            for (int j = 1; j < gameobject.length; j++) {
-                if (Math.abs(player.getX() - gameobject[j].getX()) <= 1 &&
-                        Math.abs(player.getY() - gameobject[j].getY()) <= 1) {
+            for (int j = 1; j < monsters.length; j++) {
+                if (Math.abs(player.getX() - monsters[j].getX()) <= 1 &&
+                        Math.abs(player.getY() - monsters[j].getY()) <= 1) {
                     gameOver();
                 }
             }
@@ -120,9 +120,9 @@ public class Game {
         terminal.moveCursor(player.getX(), player.getY());
         terminal.putCharacter(player.getGraphics());
 
-        for (Gameobject g : gameobject) {
-            terminal.moveCursor(g.getX(), g.getY());
-            terminal.putCharacter(g.getGraphics());
+        for (Monster m : monsters) {
+            terminal.moveCursor(m.getX(), m.getY());
+            terminal.putCharacter(m.getGraphics());
         }
     }
 

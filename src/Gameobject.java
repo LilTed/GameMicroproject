@@ -3,31 +3,29 @@ public class Gameobject {
     private int y;
     private char graphics; //Hur objekten ser ut
 
-    protected Gameobject (int x, int y, char graphics){
-        this.x=x;
-        this.y=y;
-        this.graphics= graphics;
+    protected Gameobject(int x, int y, char graphics) {
+        this.x = x;
+        this.y = y;
+        this.graphics = graphics;
     }
 
-    public void onLoop(){
+    public void onLoop() {
 
     }
-    public void onLoop(int playerX, int playerY) {
 
-    }
-    public void onMove(){
-
-    }
-    public int getX(){
+    public int getX() {
         return x;
     }
+
     public int getY() {
         return y;
     }
-    public char getGraphics(){
+
+    public char getGraphics() {
         return graphics;
     }
-    protected void move(int x, int y){
+
+    protected void move(int x, int y) {
         this.x += x;
         this.y += y;
     }

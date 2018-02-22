@@ -4,7 +4,6 @@ public class Monster extends Gameobject {
         super(x, y, 'M');
     }
 
-    @Override
     public void onLoop(int playerX, int playerY) {
         moveTowardsPlayer(playerX, playerY);
     }
