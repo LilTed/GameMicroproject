@@ -3,6 +3,7 @@ import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.terminal.Terminal;
 
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Game {
@@ -12,6 +13,8 @@ public class Game {
 
     private int score;
     private int highScore;
+
+    private ArrayList<Gameobject> objects;
 
     private Monster[] monsters;
     private Player player;
@@ -38,10 +41,14 @@ public class Game {
         score = 0;
         Random rand = new Random();
         monsters = new Monster[rand.nextInt(4) + 2];
+        objects = new ArrayList<>();
         player = new Player(20, 20);
+        objects.add(player);
         for (int i = 0; i < monsters.length; i++) {
-            monsters[i] = new Monster(rand.nextInt(terminal.getTerminalSize().getColumns()),
+            Monster t = new Monster(rand.nextInt(terminal.getTerminalSize().getColumns()),
                     rand.nextInt(terminal.getTerminalSize().getRows()));
+            monsters[i] = t;
+            objects.add(t);
         }
         onScreen();
     }
@@ -60,7 +67,7 @@ public class Game {
     private void onLoop() {
         player.onLoop();
         for (int i = 0; i < monsters.length; i++) {
-            monsters[i].onLoop(player.getX(), player.getY());
+            monsters[i].onLoop(player.getX(), player.getY(), objects);
         }
     }
 
@@ -82,22 +89,22 @@ public class Game {
                 case ArrowDown:
                     score++;
                     badInput = false;
-                    player.moveDown();
+                    player.moveDown(objects);
                     break;
                 case ArrowUp:
                     score++;
                     badInput = false;
-                    player.moveUp();
+                    player.moveUp(objects);
                     break;
                 case ArrowLeft:
                     score++;
                     badInput = false;
-                    player.moveLeft();
+                    player.moveLeft(objects);
                     break;
                 case ArrowRight:
                     score++;
                     badInput = false;
-                    player.moveRight();
+                    player.moveRight(objects);
                     break;
             }
 
@@ -122,13 +129,10 @@ public class Game {
 
     private void onScreen() {
         terminal.clearScreen();
-
-        terminal.moveCursor(player.getX(), player.getY());
-        terminal.putCharacter(player.getGraphics());
-
-        for (Monster m : monsters) {
-            terminal.moveCursor(m.getX(), m.getY());
-            terminal.putCharacter(m.getGraphics());
+        
+        for (Gameobject o : objects) {
+            terminal.moveCursor(o.getX(), o.getY());
+            terminal.putCharacter(o.getGraphics());
         }
 
     }

@@ -1,6 +1,6 @@
 public class Gameobject {
-    private int x;
-    private int y;
+    protected int x;
+    protected int y;
     private char graphics; //Hur objekten ser ut
 
     protected Gameobject(int x, int y, char graphics) {
@@ -24,10 +24,4 @@ public class Gameobject {
     public char getGraphics() {
         return graphics;
     }
-
-    protected void move(int x, int y) {
-        this.x += x;
-        this.y += y;
-    }
-
 }
