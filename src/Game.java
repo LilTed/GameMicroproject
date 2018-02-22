@@ -129,7 +129,7 @@ public class Game {
 
     private void onScreen() {
         terminal.clearScreen();
-        
+
         for (Gameobject o : objects) {
             terminal.moveCursor(o.getX(), o.getY());
             terminal.putCharacter(o.getGraphics());
